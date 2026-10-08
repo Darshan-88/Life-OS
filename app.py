@@ -6,7 +6,13 @@ from datetime import datetime, date, timedelta
 import os
 
 BASE_DIR = Path(__file__).resolve().parent
-DB_PATH = BASE_DIR / "lifeos.db"
+
+# Use the local SQLite database on your computer.
+# Use Vercel's temporary /tmp directory when deployed on Vercel.
+if os.environ.get("VERCEL"):
+    DB_PATH = "/tmp/lifeos.db"
+else:
+    DB_PATH = str(BASE_DIR / "lifeos.db")
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "life-os-development-secret-change-me")
