@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Life OS — {{ 'Create account' if mode == 'signup' else 'Sign in' }}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="auth-body">
+<div class="auth-wrap">
+  <div class="auth-brand"><span class="brand-dot"></span>LIFE<span>OS</span></div>
+  <div class="auth-grid">
+    <section class="auth-copy"><span class="eyebrow">PERSONAL OPERATING SYSTEM / 2026</span><h1>Make space<br><em>for what matters.</em></h1><p>Tasks. Money. Habits. Notes. Plans. One focused workspace.</p><div class="auth-stats"><span>01 / SIMPLE</span><span>02 / PRIVATE</span><span>03 / USEFUL</span></div></section>
+    <section class="auth-card">
+      <span class="eyebrow">{{ 'START HERE' if mode == 'signup' else 'WELCOME BACK' }}</span>
+      <h2>{{ 'Build your workspace.' if mode == 'signup' else 'Return to your day.' }}</h2>
+      {% if error %}<div class="error">{{ error }}</div>{% endif %}
+      <form method="post">
+        {% if mode == 'signup' %}<label>Name<input name="name" placeholder="Your name" required></label>{% endif %}
+        <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+        <label>Password<input type="password" name="password" placeholder="6+ characters" required></label>
+        <button class="primary full" type="submit">{{ 'Create Life OS' if mode == 'signup' else 'Sign in' }} ↗</button>
+      </form>
+      <p class="switch">{{ 'Already have an account?' if mode == 'signup' else 'New to Life OS?' }} <a href="{{ url_for('login' if mode == 'signup' else 'signup') }}">{{ 'Sign in' if mode == 'signup' else 'Create account' }}</a></p>
+      <div class="demo-note">Demo-friendly: a new account starts with example tasks, spending, habits and events that you can edit.</div>
+    </section>
+  </div>
+  <div class="auth-footer">LIFE OS / PERSONAL COMMAND CENTER <span>© 2026</span></div>
+</div>
+</body>
+</html>

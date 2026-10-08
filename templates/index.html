@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Life OS — Personal Command Center</title>
+  <meta name="description" content="Life OS — one calm workspace for tasks, money, habits, notes and plans.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand"><span class="brand-dot"></span><span>LIFE<span>OS</span></span></div>
+    <div class="side-label">WORKSPACE</div>
+    <nav>
+      <button class="nav-item active" data-view="overview"><span>01</span> Overview</button>
+      <button class="nav-item" data-view="tasks"><span>02</span> Tasks</button>
+      <button class="nav-item" data-view="money"><span>03</span> Money</button>
+      <button class="nav-item" data-view="habits"><span>04</span> Habits</button>
+      <button class="nav-item" data-view="notes"><span>05</span> Notes</button>
+      <button class="nav-item" data-view="calendar"><span>06</span> Calendar</button>
+      <button class="nav-item" data-view="assistant"><span>07</span> AI Assistant</button>
+    </nav>
+    <div class="side-bottom">
+      <div class="mini-card"><span class="mini-kicker">TODAY</span><strong id="sideDate">—</strong><small>Keep it simple.</small></div>
+      <form action="/logout" method="post"><button class="logout">Log out ↗</button></form>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu">☰</button>
+      <div class="breadcrumb">LIFE OS / <span id="currentViewLabel">OVERVIEW</span></div>
+      <div class="top-actions"><span class="live-dot"></span><span>Personal workspace</span><div class="avatar" id="avatar">D</div></div>
+    </header>
+
+    <section class="hero">
+  <div class="hero-kicker">YOUR PERSONAL OPERATING SYSTEM · 2026</div>
+
+  <h1>Make space<br><em>for what matters.</em></h1>
+
+  <p>
+    One calm place for your tasks, money, habits, notes and plans.
+    Designed to help you see the whole picture without adding noise.
+  </p>
+
+  <div class="hero-actions">
+    <button class="primary" id="quickAddBtn">+ Quick add</button>
+    <button class="secondary" data-view-jump="assistant">
+      Ask Life OS <span>↗</span>
+    </button>
+  </div>
+
+  <!-- DAY COUNTDOWN -->
+  <div class="day-countdown">
+
+    <div class="countdown-box">
+      <strong id="countHours">00</strong>
+      <span>HRS</span>
+    </div>
+
+    <div class="countdown-box">
+      <strong id="countMinutes">00</strong>
+      <span>MIN</span>
+    </div>
+
+    <div class="countdown-box">
+      <strong id="countSeconds">00</strong>
+      <span>SEC</span>
+    </div>
+
+  </div>
+
+  <div class="day-info">
+    <strong id="hoursLeftText">00 hours left in the day</strong>
+    <span id="currentDateText">—</span>
+  </div>
+
+</section>
+
+    <section class="stats-grid">
+      <article class="stat-card dark"><span>OPEN TASKS</span><strong id="pendingCount">—</strong><small>items still in motion</small></article>
+      <article class="stat-card yellow"><span>MONTHLY SPEND</span><strong id="spentTotal">₹0</strong><small>logged this month</small></article>
+      <article class="stat-card"><span>COMPLETED</span><strong id="completedCount">—</strong><small>tasks finished</small></article>
+      <article class="stat-card"><span>FOCUS</span><strong>82%</strong><small>your weekly rhythm</small></article>
+    </section>
+
+    <section class="content-grid">
+      <article class="panel tasks-panel" id="view-overview">
+        <div class="panel-head"><div><span class="eyebrow">01 / TODAY</span><h2>What's moving?</h2></div><button class="text-btn" data-view-jump="tasks">View all ↗</button></div>
+        <div id="taskList" class="task-list"></div>
+      </article>
+
+      <article class="panel agenda-panel">
+        <div class="panel-head"><div><span class="eyebrow">02 / NEXT</span><h2>On the horizon</h2></div></div>
+        <div id="eventList" class="event-list"></div>
+      </article>
+    </section>
+
+    <section class="section-intro">
+      <span class="eyebrow">THE SYSTEM</span>
+      <h2>Different parts of life.<br><em>One place to see them.</em></h2>
+    </section>
+
+    <section class="feature-cards">
+      <article class="feature-card black" data-view-jump="money">
+        <span class="card-number">03</span><span class="card-icon">₹</span><div><span class="eyebrow">MONEY</span><h3>Know where it goes.</h3><p>Track everyday spending, categories and monthly patterns without turning your life into a spreadsheet.</p></div><span class="card-arrow">↗</span>
+      </article>
+      <article class="feature-card cream" data-view-jump="habits">
+        <span class="card-number">04</span><span class="card-icon">↻</span><div><span class="eyebrow">HABITS</span><h3>Small actions. Long streaks.</h3><p>Keep the routines that move you forward visible, simple and satisfying.</p></div><span class="card-arrow">↗</span>
+      </article>
+      <article class="feature-card yellow-card" data-view-jump="notes">
+        <span class="card-number">05</span><span class="card-icon">✦</span><div><span class="eyebrow">NOTES</span><h3>Capture before it disappears.</h3><p>Ideas, plans and reminders live beside the rest of your day instead of getting lost in tabs.</p></div><span class="card-arrow">↗</span>
+      </article>
+    </section>
+
+    <section class="content-grid lower-grid">
+      <article class="panel">
+        <div class="panel-head"><div><span class="eyebrow">06 / HABITS</span><h2>Your rhythm</h2></div><button class="text-btn" data-view-jump="habits">Manage ↗</button></div>
+        <div id="habitList" class="habit-list"></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><span class="eyebrow">07 / NOTES</span><h2>Latest thinking</h2></div><button class="text-btn" data-view-jump="notes">Open notes ↗</button></div>
+        <div id="noteList" class="note-list"></div>
+      </article>
+    </section>
+
+    <section class="quote-section">
+      <div class="quote-mark">“</div>
+      <p>A good system should make your life feel <em>lighter</em>, not more complicated.</p>
+      <span>— LIFE OS PRINCIPLE 01</span>
+    </section>
+    <footer>
+
+  <div class="footer-links">
+
+    <div>
+      <b>Life OS</b>
+      <span>Personal command center</span>
+    </div>
+
+    <div>
+      <b>Workspace</b>
+      <span>Tasks · Money · Habits · Notes · AI</span>
+    </div>
+
+    <div>
+      <b>Contact</b>
+      <span>DARSHAN</span>
+      <a href="mailto:darshan712871@gmail.com">
+        darshan712871@gmail.com
+      </a>
+    </div>
+
+  </div>
+
+  <div class="footer-word">LIFEOS</div>
+
+  <small>© 2026 Life OS · Built as a portfolio product</small>
+
+</footer>
+  </main>
+</div>
+
+<div class="modal" id="quickModal">
+  <div class="modal-card">
+    <button class="modal-close" data-close>×</button><span class="eyebrow">QUICK ADD</span><h2>What are we adding?</h2>
+    <div class="quick-options"><button data-quick="task">✓ Task</button><button data-quick="expense">₹ Expense</button><button data-quick="note">✦ Note</button></div>
+  </div>
+</div>
+
+<div class="modal" id="formModal">
+  <div class="modal-card"><button class="modal-close" data-close>×</button><div id="formContent"></div></div>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
